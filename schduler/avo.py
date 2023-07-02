@@ -27,6 +27,9 @@ def crossover(parent1, parent2):
 
 
 def avo_algorithm(config, jobs, fitness_func):
+    if len(jobs) == 0:
+        return []
+
     avo_max_iterations = config['avo_max_iterations']
     avo_population_size = config['avo_population_size']
 

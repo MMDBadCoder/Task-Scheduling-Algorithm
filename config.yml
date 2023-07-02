@@ -1,8 +1,8 @@
 ---
 mapping_algorithm: 'BEST_FIT'
-cores_number: 1
-scheduling_algorithm: 'CGO'
-scheduling_time_limit: 10
+cores_number: 3
+scheduling_algorithm: 'AVO'
+scheduling_time_limit: 20
 fitness_func: 'ONLY_DEADLINE'
 
 show_plots: Yes

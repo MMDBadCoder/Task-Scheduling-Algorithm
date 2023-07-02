@@ -2,6 +2,9 @@ from schduler.job_utils import generate_random_schedules, mutate_job, mutate_ord
 
 
 def cgo_algorithm(config, jobs, fitness_func):
+    if len(jobs) == 0:
+        return []
+
     cgo_max_iterations = config['cgo_max_iterations']
     cgo_population_size = config['cgo_population_size']
     cgo_job_mutation_size = config['cgo_job_mutation_size']

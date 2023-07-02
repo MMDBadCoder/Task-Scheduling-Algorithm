@@ -4,12 +4,17 @@ import matplotlib.pyplot as plt
 
 
 def visualize_task_execution(config, schedule, chart_title):
-    # Set the y-axis ticks and labels
+    if len(schedule) == 0:
+        return
+
+        # Set the y-axis ticks and labels
     task_ids = list(set([job['t']['id'] for job in schedule]))
     y_labels = set(["Task " + str(id) for id in task_ids])
 
     # Create a horizontal bar chart
     fig, axes = plt.subplots(nrows=len(y_labels), ncols=1, sharex=True)
+    if len(y_labels) == 1:
+        axes = [axes]
 
     # Set the title
     axes[0].set_title(chart_title)
