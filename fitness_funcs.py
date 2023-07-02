@@ -1,13 +1,13 @@
 from enum import Enum
 
 
-class SchedulingAlgorithm(Enum):
+class FitnessApproach(Enum):
     ONLY_DEADLINE = 1
 
 
 def get_fitness_func(config):
-    func_key = SchedulingAlgorithm[config['fitness_func']]
-    if func_key == SchedulingAlgorithm.ONLY_DEADLINE:
+    func_key = FitnessApproach[config['fitness_func']]
+    if func_key == FitnessApproach.ONLY_DEADLINE:
         return only_deadline
 
 

@@ -4,7 +4,6 @@ from schduler.job_utils import make_start_times_sorted, generate_random_schedule
     get_k_best_items
 
 
-
 def crossover(parent1, parent2):
     sum_of_job_index = {}
 
