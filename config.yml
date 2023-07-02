@@ -2,7 +2,7 @@
 mapping_algorithm: 'BEST_FIT'
 cores_number: 1
 scheduling_algorithm: 'CGO'
-scheduling_time_limit: 9w
+scheduling_time_limit: 9
 fitness_func: 'ONLY_DEADLINE'
 
 show_plots: Yes
