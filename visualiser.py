@@ -9,11 +9,10 @@ def visualize_task_execution(config, schedule, chart_title):
 
         # Set the y-axis ticks and labels
     task_ids = list(set([job['t']['id'] for job in schedule]))
-    y_labels = set(["Task " + str(id) for id in task_ids])
 
     # Create a horizontal bar chart
-    fig, axes = plt.subplots(nrows=len(y_labels), ncols=1, sharex=True)
-    if len(y_labels) == 1:
+    fig, axes = plt.subplots(nrows=len(task_ids), ncols=1, sharex=True)
+    if len(task_ids) == 1:
         axes = [axes]
 
     # Set the title
@@ -23,8 +22,8 @@ def visualize_task_execution(config, schedule, chart_title):
     max_x = int(config['scheduling_time_limit'])
     for ax_index, task_id in enumerate(task_ids):
         ax = axes[ax_index]
-        ax.set_yticks([0])
-        ax.set_yticklabels(["Task " + str(task_id)])
+        ax.set_yticks([task_id])
+        ax.set_yticklabels(["Task " + str(task_id)], )
         ax.set_xlim(0, max_x)
 
     for job in schedule:
