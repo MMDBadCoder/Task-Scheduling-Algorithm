@@ -10,15 +10,15 @@ def crossover(parent1, parent2):
     def get_id_of_job(job):
         return str(job['t']['id']) + '-' + str(job['r'])
 
-    def add_index_to_dict(schedule):
+    def sum_index(schedule):
         for index, job in enumerate(schedule):
             sum_of_job_index[get_id_of_job(job)] += index
 
     for job in parent1:
         sum_of_job_index[get_id_of_job(job)] = 0
 
-    add_index_to_dict(parent1)
-    add_index_to_dict(parent2)
+    sum_index(parent1)
+    sum_index(parent2)
 
     child = sorted(parent1, key=lambda job: sum_of_job_index[get_id_of_job(job)])
     make_start_times_sorted(child)
@@ -35,7 +35,7 @@ def avo_algorithm(config, jobs, fitness_func):
     population = generate_random_schedules(jobs, avo_population_size)
 
     for _ in range(avo_max_iterations):
-        parent1 = random.choice(population)
+        parent1 = get_k_best_items(population, fitness_func, 1)[0]
         parent2 = random.choice(population)
 
         # Perform crossover operation
@@ -48,7 +48,7 @@ def avo_algorithm(config, jobs, fitness_func):
         population.append(child2)
         population.append(child3)
 
-        population = get_k_best_items(population, fitness_func, len(population))
+        population = get_k_best_items(population, fitness_func, len(population) - 3)
 
     # Get the best solution from the final population
     best_schedule = min(population, key=lambda s: fitness_func(s))
