@@ -1,9 +1,9 @@
 from enum import Enum
 
-from avo import avo_algorithm
-from cgo import cgo_algorithm
 from fitness_funcs import get_fitness_func
-from job_utils import generate_jobs
+from schduler.avo import avo_algorithm
+from schduler.cgo import cgo_algorithm
+from schduler.job_utils import generate_jobs
 
 
 class SchedulingAlgorithm(Enum):
