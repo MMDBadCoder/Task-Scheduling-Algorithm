@@ -1,3 +1,18 @@
 ---
 mapping_algorithm: 'BEST_FIT'
-cores_number: 2
+cores_number: 3
+scheduling_algorithm: 'CGO'
+scheduling_time_limit: 30
+fitness_func: 'ONLY_DEADLINE'
+
+show_plots: Yes
+save_plots: Yes
+
+cgo_max_iterations: 100
+cgo_population_size: 10
+cgo_job_mutation_size: 5
+cgo_order_mutation_size: 5
+
+avo_max_iterations: 100
+avo_population_size: 10
+avo_mutation_rate: 0.1

@@ -8,7 +8,10 @@ class MappingAlgorithm(Enum):
 
 
 # return a dict from task id to core number
-def map_tasks_to_cores(tasks: [], cores_num: int, mapping_alg: MappingAlgorithm):
+def map_tasks_to_cores(config: dict, tasks: []):
+    mapping_alg = MappingAlgorithm[config['mapping_algorithm']]
+    cores_num = int(config['cores_number'])
+
     if mapping_alg is MappingAlgorithm.BEST_FIT:
         return _map_with_best_fit(tasks, cores_num)
     elif mapping_alg is MappingAlgorithm.WORST_FIT:
