@@ -15,7 +15,7 @@ def generate_jobs(tasks, time_limit):
             }
             jobs.append(job)
             current_time += task['p']
-    return jobs
+    return sorted(jobs, key=lambda job: job['r'])
 
 
 def make_start_times_sorted(schedule):
