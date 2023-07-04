@@ -18,11 +18,9 @@ def cgo_algorithm(config, jobs, fitness_func):
         for schedule in population:
             schedule = clone_schedule(schedule)
             for j in range(cgo_job_mutation_size):
-                mutated_schedule = mutate_job(schedule)
-                all_mutated_schedules.append(mutated_schedule)
+                all_mutated_schedules += mutate_job(schedule)
             for j in range(cgo_order_mutation_size):
-                mutated_schedule = mutate_order(schedule)
-                all_mutated_schedules.append(mutated_schedule)
+                all_mutated_schedules.append(mutate_order(schedule))
 
         population = get_k_best_items(all_mutated_schedules, fitness_func, len(population))
 

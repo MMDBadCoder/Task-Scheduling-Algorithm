@@ -53,17 +53,23 @@ def mutate_order(schedule):
 
 
 def mutate_job(schedule):
+    result = []
+
     index = random.randint(0, len(schedule) - 1)
-    if bool(random.getrandbits(1)):
-        # try to move schedule frontend
-        if index == len(schedule) - 1 or schedule[index + 1]['s'] != schedule[index]['s'] + schedule[index]['e']:
-            schedule[index]['s'] += 1
-    else:
-        # try to move backend
-        if index == 0 or schedule[index - 1]['s'] + schedule[index - 1]['e'] != schedule[index]['s']:
-            schedule[index]['s'] -= 1
-    schedule = make_start_times_sorted(schedule)
-    return schedule
+
+    # try to move schedule frontend
+    if index == len(schedule) - 1 or schedule[index + 1]['s'] != schedule[index]['s'] + schedule[index]['e']:
+        schedule1 = clone_schedule(schedule)
+        schedule1[index]['s'] += 1
+        result.append(schedule1)
+
+    # try to move backend
+    if index == 0 or schedule[index - 1]['s'] + schedule[index - 1]['e'] != schedule[index]['s']:
+        schedule2 = clone_schedule(schedule)
+        schedule2[index]['s'] -= 1
+        result.append(schedule2)
+
+    return result
 
 
 def clone_schedule(schedule):

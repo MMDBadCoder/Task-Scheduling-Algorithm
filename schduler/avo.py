@@ -39,14 +39,11 @@ def avo_algorithm(config, jobs, fitness_func):
         parent2 = random.choice(population)
 
         # Perform crossover operation
-        child1 = crossover(parent1, parent2)
+        child = crossover(parent1, parent2)
 
-        child2 = mutate_job(child1)
-        child3 = mutate_order(child1)
-
-        population.append(child1)
-        population.append(child2)
-        population.append(child3)
+        population.append(child)
+        population += mutate_job(child)
+        population.append(mutate_order(child))
 
         population = get_k_best_items(population, fitness_func, len(population) - 3)
 
