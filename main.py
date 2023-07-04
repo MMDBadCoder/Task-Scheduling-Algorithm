@@ -8,8 +8,8 @@ import yaml
 
 from core_mapper import map_tasks_to_cores
 from schduler.schedule_detail_reporter import make_report_json
-from tasks_reader import read_csv_file
 from schduler.tasks_scheduler import schedule_tasks
+from tasks_reader import read_csv_file
 from visualiser import visualize_task_execution
 
 
@@ -18,7 +18,7 @@ def run_with_config(config):
 
     if not config.__contains__('output_dir'):
         config['output_dir'] = './output/' + str(datetime.datetime.now())
-    os.makedirs(config['output_dir'])
+    os.makedirs(config['output_dir'], exist_ok=True)
 
     if len(sys.argv) < 2:
         raise RuntimeError('You should pass path of csv file of tasks as argument')
@@ -44,16 +44,21 @@ def run_with_config(config):
 
     algorithm_execution_time = time.time() - start_time
 
-    for core_i in range(cores_num):
-        visualize_task_execution(config, schedules[core_i], 'Core ' + str(core_i))
+    if config['show_plots'] or config['save_plots']:
+        for core_i in range(cores_num):
+            visualize_task_execution(config, schedules[core_i], 'Core ' + str(core_i))
 
     result_json = make_report_json(schedules)
     result_json['algorithm_execution_time'] = algorithm_execution_time
     result_json['fitness_values'] = fitness_values
+    result_json['fitness_sum'] = sum(fitness_values)
     result_json['task_mapping'] = tasks_mapping
-    report_file_path = config['output_dir'] + "/report.json"
-    with open(report_file_path, 'w') as file:
-        file.write(json.dumps(result_json, indent=3))
+    if config['save_result']:
+        report_file_path = config['output_dir'] + "/report.json"
+        with open(report_file_path, 'w') as file:
+            file.write(json.dumps(result_json, indent=3))
+
+    return result_json
 
 
 if __name__ == "__main__":
