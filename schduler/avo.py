@@ -21,7 +21,7 @@ def crossover(parent1, parent2):
     sum_index(parent2)
 
     child = sorted(parent1, key=lambda job: sum_of_job_index[get_id_of_job(job)])
-    make_start_times_sorted(child)
+    child = make_start_times_sorted(child)
     return child
 
 
@@ -45,7 +45,7 @@ def avo_algorithm(config, jobs, fitness_func):
         population += mutate_job(child)
         population.append(mutate_order(child))
 
-        population = get_k_best_items(population, fitness_func, len(population) - 3)
+        population = get_k_best_items(population, fitness_func, avo_population_size)
 
     # Get the best solution from the final population
     best_schedule = min(population, key=lambda s: fitness_func(s))

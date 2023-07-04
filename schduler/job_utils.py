@@ -39,6 +39,7 @@ def generate_random_schedules(jobs, population_size):
 
 
 def mutate_order(schedule):
+    schedule = clone_schedule(schedule)
     if len(schedule) <= 1:
         return schedule
     index = random.randint(0, len(schedule) - 2)
@@ -64,7 +65,8 @@ def mutate_job(schedule):
         result.append(schedule1)
 
     # try to move backend
-    if index == 0 or schedule[index - 1]['s'] + schedule[index - 1]['e'] != schedule[index]['s']:
+    if (index == 0 or schedule[index - 1]['s'] + schedule[index - 1]['e'] != schedule[index]['s']) \
+            and schedule[index]['s'] != 0:
         schedule2 = clone_schedule(schedule)
         schedule2[index]['s'] -= 1
         result.append(schedule2)

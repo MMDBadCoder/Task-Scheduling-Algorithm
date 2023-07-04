@@ -16,7 +16,6 @@ def cgo_algorithm(config, jobs, fitness_func):
 
         all_mutated_schedules = list(population)
         for schedule in population:
-            schedule = clone_schedule(schedule)
             for j in range(cgo_job_mutation_size):
                 all_mutated_schedules += mutate_job(schedule)
             for j in range(cgo_order_mutation_size):
