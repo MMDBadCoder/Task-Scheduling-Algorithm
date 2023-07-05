@@ -11,7 +11,7 @@ def show_chart(config, data):
     courses = list(data.keys())
     values = list(data.values())
 
-    fig = plt.figure(figsize=(10, 5))
+    fig, ax = plt.subplots()
 
     plt.bar(courses, values, color='maroon', width=0.9)
 
@@ -26,7 +26,7 @@ def show_chart(config, data):
         plots_dir_path = config['output_dir'] + "/plots"
         os.makedirs(plots_dir_path, exist_ok=True)
         plot_path = plots_dir_path + '/analyse.png'
-        plt.savefig(plot_path)
+        fig.savefig(plot_path)
 
 
 if __name__ == "__main__":
