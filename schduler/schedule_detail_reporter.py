@@ -1,5 +1,7 @@
 from statistics import mean
 
+from fitness_funcs import missed_deadlines_num
+
 
 def make_report_json(schedules):
     jobs = []
@@ -53,7 +55,12 @@ def make_report_json(schedules):
             current_time = job['s'] + job['e']
             last_job = job
 
+    missed_deadlines = 0
+    for schedule in schedules:
+        missed_deadlines += missed_deadlines_num(schedule)
+
     return {
         'stat': statistics,
-        'slack': slack
+        'slack': slack,
+        'missed deadlines': missed_deadlines
     }

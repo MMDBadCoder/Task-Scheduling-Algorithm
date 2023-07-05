@@ -3,7 +3,7 @@ mapping_algorithm: 'BEST_FIT'
 cores_number: 3
 scheduling_algorithm: 'CGO'
 scheduling_time_limit: 20
-fitness_func: 'WAIT_TIME'
+fitness_func: 'CUSTOM'
 
 show_plots: Yes
 save_plots: Yes
