@@ -1,6 +1,6 @@
 from enum import Enum
 
-deadline_penalty = 1000
+deadline_penalty = 50
 
 
 class FitnessApproach(Enum):
@@ -81,4 +81,4 @@ def slack_time(jobs):
 
 
 def custom_fitness(jobs):
-    return completion_time(jobs) + latency_time(jobs)
+    return response_time(jobs) + wait_time(jobs)
