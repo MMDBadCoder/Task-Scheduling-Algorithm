@@ -54,6 +54,8 @@ def wait_time(jobs):
 
 
 def completion_time(jobs):
+    if len(jobs) == 0:
+        return 0
     finish_times = []
     for job in jobs:
         finish_times.append(job['s'] + job['e'])
